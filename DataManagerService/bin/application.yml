@@ -1,0 +1,43 @@
+server:
+  port: 8088
+  
+spring:
+  application:
+    name: data-manager-service
+  data:
+    mongodb:
+      host: 217.78.105.173
+      port: 27017
+      database: device-group
+
+#  datasource:
+#    url : jdbc:h2:tcp://217.78.105.173:9093/./h2/app_db;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=TRUE;DB_CLOSE_DELAY=-1;
+#    username : sa
+#    password : 
+#    driverClassName : org.h2.Driver
+#    initialize : false
+  cloud:
+    consul:
+      host: 217.78.105.173
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+        healthCheckPath: /health
+        preferIpAddress: true 
+        ip-address: 217.78.105.172
+  kafka:
+      bootstrap-servers: 217.78.105.28:9092
+      producer:
+          key-serializer: org.apache.kafka.common.serialization.StringSerializer
+          value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      consumer:
+          group-id: boot
+          key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+          auto-offset-reset: earliest
+logging:
+  level:
+    com.netas: DEBUG
+kafka:
+  topic:
+    boot: boot.t
