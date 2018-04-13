@@ -6,7 +6,7 @@ spring:
     name: data-manager-service
   data:
     mongodb:
-      host: 217.78.105.173
+      host: ip
       port: 27017
       database: device-group
 
@@ -18,15 +18,15 @@ spring:
 #    initialize : false
   cloud:
     consul:
-      host: 217.78.105.173
+      host: ip
       port: 8500
       discovery:
         instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
         healthCheckPath: /health
         preferIpAddress: true 
-        ip-address: 217.78.105.172
+        ip-address: ip
   kafka:
-      bootstrap-servers: 217.78.105.28:9092
+      bootstrap-servers: ip:port
       producer:
           key-serializer: org.apache.kafka.common.serialization.StringSerializer
           value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
